@@ -1,0 +1,5 @@
+replicaCount: 2
+
+env:
+  - name: GRPC_PORT
+    value: "50051"

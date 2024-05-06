@@ -1,0 +1,50 @@
+syntax = "proto3";
+
+package proto.namespace.taskservice;
+
+option go_package = "./pb";
+
+service TaskService {
+  rpc TaskCreate (TaskCreate.Request) returns (TaskCreate.Response);
+  rpc GetTask (GetTask.Request) returns (GetTask.Response);
+}
+
+message Session {
+  uint64 user_id = 1;
+}
+
+message TaskCreate {
+  message Request {
+    message Data {
+      string name = 1;
+    }
+
+    Data data = 1;
+    Session session = 2;
+  }
+
+  message Response {
+    uint64 id = 1;
+    string name = 2;
+    uint64 user_id = 3;
+    optional string username = 4;
+  }
+}
+
+message GetTask {
+  message Request {
+    message Data {
+      uint64 id = 1;
+    }
+
+    Data data = 1;
+    Session session = 2;
+  }
+
+  message Response {
+    uint64 id = 1;
+    string name = 2;
+    uint64 user_id = 3;
+    optional string username = 4;
+  }
+}
